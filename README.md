@@ -4,3 +4,4 @@
 
 ## Description
 
+This is just a fake frontend for a medicial non-profit using react and IBM's Frontend Developer project requirements there is no backend, it's just a frontend and uses local storage to store data.

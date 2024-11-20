@@ -10,10 +10,14 @@ function App() {
     <>
       <BrowserRouter>
         <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
+        <div className="p-4">
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+            </Routes>
+          </main>
+        </div>
       </BrowserRouter>
     </>
   )
