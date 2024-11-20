@@ -14,6 +14,8 @@ export const NavBar = () => {
                 <div className="flex flex-row gap-2 [&>a]:btn [&>a]:btn-ghost">
                     <Link to="/">Home</Link>
                     <Link to="/about">About</Link>
+                    <Link to="/blog">Blog</Link>
+                    <Link to="/reviews">Reviews</Link>
                     <Link to="/login">Login</Link>
                     <Link to="/logout">Logout</Link>
                     <Link to="/register">Register</Link>
