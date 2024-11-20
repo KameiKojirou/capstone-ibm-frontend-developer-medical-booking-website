@@ -1,7 +1,9 @@
+import { Title } from "../components/Title"
+
 export const About = () => {
     return (
         <div>
-            <h1>About</h1>
+            <Title>About</Title>
         </div>
     )
 }
