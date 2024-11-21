@@ -15,6 +15,7 @@ import { SelfCheckup } from './pages/services/SelfCheckup'
 import { Guidance } from './pages/services/Guidance'
 import { Blog } from './pages/Blog'
 import { Reviews } from './pages/Reviews'
+import { ToastTest } from './pages/ToastTest'
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
               <Route path="/services" element={<Services />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/reviews" element={<Reviews />} />
+              <Route path="/toasttest" element={<ToastTest />} />
               <Route path="/services/consulation" element={<Consulation />} />
               <Route path="/services/appointment" element={<Appointment />} />
               <Route path="/services/selfcheckup" element={<SelfCheckup />} />

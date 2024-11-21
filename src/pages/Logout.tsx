@@ -9,7 +9,6 @@ export const Logout = () => {
             <Title>Logout</Title>
             <button onClick={() => {
                 Cookies.remove("token")
-                localStorage.removeItem("account")
                 navigate("/")
             }}
             className="btn btn-primary">Logout</button>

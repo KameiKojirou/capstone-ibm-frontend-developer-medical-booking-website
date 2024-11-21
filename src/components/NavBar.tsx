@@ -1,7 +1,22 @@
 import { Link } from "react-router-dom"
 import Cookies from "js-cookie"
+import { useEffect, useState } from "react"
+
 export const NavBar = () => {
-    const token = Cookies.get("token")
+    const [token, setToken] = useState("")
+    const [account, setAccount] = useState("")
+
+    useEffect(() => {
+        const tkn = Cookies.get("token")
+        if (tkn) {
+            setToken(tkn)
+        }
+        const acc = localStorage.getItem("account")
+        if (acc) {
+            setAccount(acc)
+        }
+    }, []) // Empty dependency array ensures this runs only on mount
+
     return (
         <div className="p-4 w-full">
             <nav className="flex flex-row flex-wrap justify-between gap-2 [&>a]:btn [&>a]:btn-ghost">
@@ -20,6 +35,7 @@ export const NavBar = () => {
                     {token ? 
                     <>
                         <Link to="/services">Services</Link>
+                        {account && JSON.parse(account).name ? <Link to="/services" className="btn btn-ghost capitalize">{JSON.parse(account).name}</Link> : null}
                         <Link to="/logout">Logout</Link>
                     </>
                      : <>
