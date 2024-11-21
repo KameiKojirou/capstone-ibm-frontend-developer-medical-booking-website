@@ -4,7 +4,6 @@ import { addToast } from "../stores/toastStore"
 
 
 export const ToastTest = () => {
-
     const callToast = () => {
         addToast("Hello World", "success", 5000)
     }
