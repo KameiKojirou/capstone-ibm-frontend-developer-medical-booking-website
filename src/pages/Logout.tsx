@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom"
 import { Title } from "../components/Title"
+import Cookies from "js-cookie"
+import { useNavigate } from "react-router-dom"
 
 export const Logout = () => {
+    const navigate = useNavigate();
     return (
         <div>
             <Title>Logout</Title>
-            <Link to="/" className="btn btn-primary">Logout</Link>
+            <button onClick={() => {
+                Cookies.remove("token")
+                navigate("/")
+            }}
+            className="btn btn-primary">Logout</button>
         </div>
     )
 }

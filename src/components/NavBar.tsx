@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
-
+import Cookies from "js-cookie"
 export const NavBar = () => {
+    const token = Cookies.get("token")
     return (
         <div className="p-4 w-full">
             <nav className="flex flex-row flex-wrap justify-between gap-2 [&>a]:btn [&>a]:btn-ghost">
@@ -16,10 +17,15 @@ export const NavBar = () => {
                     <Link to="/about">About</Link>
                     <Link to="/blog">Blog</Link>
                     <Link to="/reviews">Reviews</Link>
-                    <Link to="/login">Login</Link>
-                    <Link to="/logout">Logout</Link>
-                    <Link to="/register">Register</Link>
-                    <Link to="/services">Services</Link>
+                    {token ? 
+                    <>
+                        <Link to="/services">Services</Link>
+                        <Link to="/logout">Logout</Link>
+                    </>
+                     : <>
+                        <Link to="/login">Login</Link> 
+                        <Link to="/register">Register</Link>
+                    </>}
                 </div>
             </nav>
         </div>
