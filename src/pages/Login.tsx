@@ -46,18 +46,18 @@ export const Login = () => {
                 <span>Are you a new member? <Link to="/register" className="underline">Register</Link></span>
                 <label htmlFor="email">Email</label>
                 <input 
-                    type="email" 
-                    name="email" 
-                    id="email" 
-                    className="input input-bordered" 
-                    onChange={(e) => setEmail(e.target.value)} 
+                    type="email"
+                    name="email"
+                    id="email"
+                    className="input input-bordered"
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 <label htmlFor="password">Password</label>
                 <input 
-                    type="password" 
-                    name="password" 
-                    id="password" 
-                    className="input input-bordered"  
+                    type="password"
+                    name="password"
+                    id="password"
+                    className="input input-bordered"
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <button type="submit" className="btn btn-primary">Login</button>

@@ -48,13 +48,14 @@ export const Register = () => {
                     <option value="doctor">Doctor</option>
                 </select>
                 <label htmlFor="name">Name</label>
-                <input 
+                <input
                     type="text"
                     name="name"
                     id="name"
                     className="input input-bordered"
                     onChange={(e) => setName(e.target.value)}
                 />
+                {name.length < 3 && name.length > 0 && <p className="text-error">Name must be at least 3 characters</p>}
                 <label htmlFor="phone">Phone</label>
                 <input
                     type="text"
@@ -63,6 +64,7 @@ export const Register = () => {
                     className="input input-bordered"
                     onChange={(e) => setPhone(e.target.value)}
                 />
+                {phone.length < 10 && phone.length > 0 && <p className="text-error">Phone must be at least 10 characters</p>}
                 <label htmlFor="email">Email</label>
                 <input
                     type="email"
@@ -71,6 +73,7 @@ export const Register = () => {
                     className="input input-bordered"
                     onChange={(e) => setEmail(e.target.value)}
                 />
+                {!email.includes("@") && !email.includes(".") && <p className="text-error">Email must be valid</p>}
                 <label htmlFor="password">Password</label>
                 <input
                     type="password"
@@ -79,6 +82,7 @@ export const Register = () => {
                     className="input input-bordered"
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                {password.length < 8 && password.length > 0 && <p className="text-error">Password must be at least 8 characters</p>}
                 <button type="submit" className="btn btn-primary">Register</button>
                 <button type="reset" className="btn btn-ghost">Cancel</button>
             </form>
