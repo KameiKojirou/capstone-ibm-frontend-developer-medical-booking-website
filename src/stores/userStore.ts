@@ -1,7 +1,7 @@
 import { atom } from "nanostores";
 
 
-export const userStore = atom({
+export const $userStore = atom({
     role: "",
     name: "",
     phone: "",
@@ -9,4 +9,4 @@ export const userStore = atom({
     password: ""
 })
 
-export const tokenStore = atom("")
+export const $tokenStore = atom("")

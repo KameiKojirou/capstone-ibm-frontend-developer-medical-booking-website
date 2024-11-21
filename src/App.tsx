@@ -40,7 +40,7 @@ function App() {
               <Route path="/services/selfcheckup" element={<SelfCheckup />} />
               <Route path="/services/guidance" element={<Guidance />} />
 
-              <Route path="*" element={<Home />} />
+              {/* <Route path="*" element={<Home />} /> */}
             </Routes>
           </main>
           <ToastContainer>
