@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { Title } from "../components/Title"
 import { useState, useEffect } from "react"
 import Cookies from "js-cookie"
+import { addToast } from "../stores/toastStore"
 
 export const Login = () => {
     const navigate = useNavigate(); // Use useNavigate hook for navigation
@@ -28,12 +29,13 @@ export const Login = () => {
                     sameSite: "strict",
                     secure: true
                 })
+                addToast("Login successful", "success", 5000)
                 navigate("/") // Navigate to home after successful login
             } else {
-                alert("Invalid email or password")
+                addToast("Invalid email or password", "error", 5000)
             }
         } else {
-            alert("No account found")
+            addToast("Account not found", "error", 5000)
         }
     }
 

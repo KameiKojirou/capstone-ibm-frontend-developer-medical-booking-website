@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { Title } from "../components/Title"
 import { useState, useEffect } from "react"
 import Cookies from "js-cookie"
+import { addToast } from "../stores/toastStore"
 
 export const Register = () => {
     const navigate = useNavigate()
@@ -11,7 +12,6 @@ export const Register = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    // Redirect if token exists
     useEffect(() => {
         const token = Cookies.get("token")
         if (token) {
@@ -28,7 +28,8 @@ export const Register = () => {
             email: email,
             password: password
         }))
-        alert("Account successfully registered!")
+        addToast("Account created successfully", "success", 5000)
+        navigate("/login")
     }
 
     return (
@@ -37,10 +38,10 @@ export const Register = () => {
             <form className="flex flex-col gap-2" onSubmit={AddAccount}>
                 <span>Already have an account? <Link to="/login" className="underline">Login</Link></span>
                 <label htmlFor="role">Role</label>
-                <select 
-                    name="role" 
-                    id="role" 
-                    className="select select-bordered" 
+                <select
+                    name="role"
+                    id="role"
+                    className="select select-bordered"
                     onChange={(e) => setRole(e.target.value)}
                 >
                     <option value="patient">Patient</option>
@@ -48,35 +49,35 @@ export const Register = () => {
                 </select>
                 <label htmlFor="name">Name</label>
                 <input 
-                    type="text" 
-                    name="name" 
-                    id="name" 
-                    className="input input-bordered" 
-                    onChange={(e) => setName(e.target.value)} 
+                    type="text"
+                    name="name"
+                    id="name"
+                    className="input input-bordered"
+                    onChange={(e) => setName(e.target.value)}
                 />
                 <label htmlFor="phone">Phone</label>
-                <input 
-                    type="text" 
-                    name="phone" 
-                    id="phone" 
-                    className="input input-bordered" 
-                    onChange={(e) => setPhone(e.target.value)} 
+                <input
+                    type="text"
+                    name="phone"
+                    id="phone"
+                    className="input input-bordered"
+                    onChange={(e) => setPhone(e.target.value)}
                 />
                 <label htmlFor="email">Email</label>
-                <input 
-                    type="email" 
-                    name="email" 
-                    id="email" 
-                    className="input input-bordered" 
-                    onChange={(e) => setEmail(e.target.value)} 
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    className="input input-bordered"
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 <label htmlFor="password">Password</label>
-                <input 
-                    type="password" 
-                    name="password" 
-                    id="password" 
-                    className="input input-bordered" 
-                    onChange={(e) => setPassword(e.target.value)} 
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    className="input input-bordered"
+                    onChange={(e) => setPassword(e.target.value)}
                 />
                 <button type="submit" className="btn btn-primary">Register</button>
                 <button type="reset" className="btn btn-ghost">Cancel</button>
