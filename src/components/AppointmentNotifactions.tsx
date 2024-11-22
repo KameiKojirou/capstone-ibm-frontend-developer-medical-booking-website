@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 type Doctor = {
     name: string;
@@ -17,15 +18,48 @@ type Appointment = {
 
 export const AppointmentNotifications = () => {
     const [appointments, setAppointments] = useState<{ [key: string]: Appointment }>({});
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-    // Fetch appointments from localStorage
-    const fetchAppointments = () => {
-        const storedAppointments = localStorage.getItem("appointments");
-        setAppointments(storedAppointments ? JSON.parse(storedAppointments) : {});
+    // Function to check login status
+    const checkLoginStatus = () => {
+        const token = Cookies.get("token");
+        const account = localStorage.getItem("account");
+        setIsLoggedIn(!!token && !!account);
     };
 
-    // Update appointments on component mount and set up listeners
     useEffect(() => {
+        // Check login status on component mount
+        checkLoginStatus();
+
+        const handleStorageChange = () => {
+            checkLoginStatus();
+        };
+
+        // Monitor localStorage changes
+        window.addEventListener("storage", handleStorageChange);
+
+        // Poll Cookies for token changes (since "storage" event doesn't cover cookies)
+        const intervalId = setInterval(() => {
+            checkLoginStatus();
+        }, 1000);
+
+        return () => {
+            window.removeEventListener("storage", handleStorageChange);
+            clearInterval(intervalId);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!isLoggedIn) {
+            setAppointments({}); // Clear appointments when logged out
+            return;
+        }
+
+        const fetchAppointments = () => {
+            const storedAppointments = localStorage.getItem("appointments");
+            setAppointments(storedAppointments ? JSON.parse(storedAppointments) : {});
+        };
+
         fetchAppointments();
 
         const handleStorageChange = (event: StorageEvent) => {
@@ -34,18 +68,17 @@ export const AppointmentNotifications = () => {
             }
         };
 
-        // Polling to ensure updates in environments without reliable `storage` events
-        const intervalId = setInterval(() => {
-            fetchAppointments();
-        }, 1000);
-
+        // Monitor changes to appointments in localStorage
         window.addEventListener("storage", handleStorageChange);
 
         return () => {
             window.removeEventListener("storage", handleStorageChange);
-            clearInterval(intervalId);
         };
-    }, []);
+    }, [isLoggedIn]);
+
+    if (!isLoggedIn) {
+        return null;
+    }
 
     return (
         <div className="toast toast-end">

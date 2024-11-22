@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Title } from "../../components/Title";
 import { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
+import { addToast } from "../../stores/toastStore";
 
 type Account = {
     name: string;
@@ -57,6 +58,7 @@ export const YourProfile = () => {
             localStorage.setItem("account", JSON.stringify(formData));
             setAccount(formData);
             handleCloseDialog();
+            addToast("Information updated successfully", "success", 5000);
         }
     };
 

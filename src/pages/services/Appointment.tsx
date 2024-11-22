@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
 import { Card } from "../../components/Card";
 import { SubTitle } from "../../components/SubTitle";
+import { addToast } from "../../stores/toastStore";
 
 type Doctor = {
     name: string;
@@ -99,6 +100,7 @@ export const Appointment = () => {
         setAppointments(updatedAppointments);
         localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
         handleCloseDialog();
+        addToast("Appointment booked successfully", "success", 5000);
     };
 
     const handleCancelAppointment = (doctorName: string) => {
@@ -107,6 +109,7 @@ export const Appointment = () => {
         setAppointments(updatedAppointments);
         localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
         handleCloseDialog();
+        addToast("Appointment canceled successfully", "success", 5000);
     };
 
     return (
