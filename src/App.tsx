@@ -9,13 +9,15 @@ import { Register } from './pages/Register'
 import { ToastContainer } from './components/ToastContainer'
 import { Toasts } from './components/Toasts'
 import { Services } from './pages/Services'
-import { Consulation } from './pages/services/Consulation'
+import { Consultation } from './pages/services/Consultation'
 import { Appointment } from './pages/services/Appointment'
 import { SelfCheckup } from './pages/services/SelfCheckup'
 import { Guidance } from './pages/services/Guidance'
 import { Blog } from './pages/Blog'
 import { Reviews } from './pages/Reviews'
 import { ToastTest } from './pages/ToastTest'
+import { YourProfile } from './pages/account/YourProfile'
+import { YourReports } from './pages/account/YourReports'
 
 function App() {
 
@@ -35,10 +37,12 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/reviews" element={<Reviews />} />
               <Route path="/toasttest" element={<ToastTest />} />
-              <Route path="/services/consulation" element={<Consulation />} />
+              <Route path="/services/consultation" element={<Consultation />} />
               <Route path="/services/appointment" element={<Appointment />} />
               <Route path="/services/selfcheckup" element={<SelfCheckup />} />
               <Route path="/services/guidance" element={<Guidance />} />
+              <Route path="/profile" element={<YourProfile />} />
+              <Route path="/reports" element={<YourReports />} />
 
               {/* <Route path="*" element={<Home />} /> */}
             </Routes>

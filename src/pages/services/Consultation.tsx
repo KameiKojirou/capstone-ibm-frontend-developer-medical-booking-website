@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
 import { Title } from "../../components/Title";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
 import { Card } from "../../components/Card";
@@ -12,21 +12,19 @@ type Doctor = {
     experience: number;
 };
 
-type Appointment = {
+type Consultation = {
     doctor: Doctor;
     patientName: string;
     patientPhone: string;
-    date: string;
-    time: string;
 };
 
-export const Appointment = () => {
+export const Consultation = () => {
     const account = localStorage.getItem("account");
     const [speciality, setSpeciality] = useState<string>("");
     const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null);
     const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-    const [appointments, setAppointments] = useState<{ [key: string]: Appointment }>(
-        JSON.parse(localStorage.getItem("appointments") || "{}")
+    const [consultations, setConsultations] = useState<{ [key: string]: Consultation }>(
+        JSON.parse(localStorage.getItem("consultations") || "{}")
     );
 
     const dialogRef = useRef<HTMLDialogElement>(null); // Reference to the dialog element
@@ -87,31 +85,29 @@ export const Appointment = () => {
         if (!selectedDoctor) return;
 
         const formData = new FormData(e.currentTarget);
-        const appointment: Appointment = {
+        const consultation: Consultation = {
             doctor: selectedDoctor,
             patientName: formData.get("patientName") as string,
             patientPhone: formData.get("patientPhone") as string,
-            date: formData.get("date") as string,
-            time: formData.get("time") as string,
         };
 
-        const updatedAppointments = { ...appointments, [selectedDoctor.name]: appointment };
-        setAppointments(updatedAppointments);
-        localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
+        const updatedConsultations = { ...consultations, [selectedDoctor.name]: consultation };
+        setConsultations(updatedConsultations);
+        localStorage.setItem("consultations", JSON.stringify(updatedConsultations));
         handleCloseDialog();
     };
 
-    const handleCancelAppointment = (doctorName: string) => {
-        const updatedAppointments = { ...appointments };
-        delete updatedAppointments[doctorName];
-        setAppointments(updatedAppointments);
-        localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
+    const handleCancelConsultation = (doctorName: string) => {
+        const updatedConsultations = { ...consultations };
+        delete updatedConsultations[doctorName];
+        setConsultations(updatedConsultations);
+        localStorage.setItem("consultations", JSON.stringify(updatedConsultations));
         handleCloseDialog();
     };
 
     return (
         <div>
-            <Title>Book an Appointment</Title>
+            <Title>Instant Consultation</Title>
             {account && <p>Logged in as: {JSON.parse(account).name}</p>}
             <h2 className="text-2xl font-bold py-4">Find a Doctor</h2>
             <select
@@ -150,32 +146,30 @@ export const Appointment = () => {
                             <p>Years of experience: {doc.experience}</p>
                             <button
                                 className={`btn ${
-                                    appointments[doc.name] ? "btn-success" : "btn-primary"
+                                    consultations[doc.name] ? "btn-success" : "btn-primary"
                                 } mt-4`}
                                 onClick={() => handleBookClick(doc)}
                             >
-                                {appointments[doc.name] ? "Booked" : "Book Appointment"}
+                                {consultations[doc.name] ? "Booked" : "Book Consultation"}
                             </button>
                         </Card>
                     ))}
             </div>
 
             <dialog ref={dialogRef} open={isDialogOpen} className="modal">
-                {selectedDoctor && appointments[selectedDoctor.name] ? (
+                {selectedDoctor && consultations[selectedDoctor.name] ? (
                     <div className="modal-box">
                         <h3 className="font-bold text-lg">
-                            Appointment Details for {selectedDoctor.name}
+                            Consultation Details for {selectedDoctor.name}
                         </h3>
-                        <p>Date: {appointments[selectedDoctor.name].date}</p>
-                        <p>Time: {appointments[selectedDoctor.name].time}</p>
-                        <p>Patient Name: {appointments[selectedDoctor.name].patientName}</p>
-                        <p>Patient Phone: {appointments[selectedDoctor.name].patientPhone}</p>
+                        <p>Patient Name: {consultations[selectedDoctor.name].patientName}</p>
+                        <p>Patient Phone: {consultations[selectedDoctor.name].patientPhone}</p>
                         <div className="modal-action">
                             <button
                                 className="btn btn-error"
-                                onClick={() => handleCancelAppointment(selectedDoctor.name)}
+                                onClick={() => handleCancelConsultation(selectedDoctor.name)}
                             >
-                                Cancel Appointment
+                                Cancel Consultation
                             </button>
                             <button className="btn" onClick={handleCloseDialog}>
                                 Close
@@ -185,7 +179,7 @@ export const Appointment = () => {
                 ) : (
                     <form method="dialog" className="modal-box" onSubmit={handleFormSubmit}>
                         <h3 className="font-bold text-lg">
-                            Book Appointment with {selectedDoctor?.name}
+                            Book Consultation with {selectedDoctor?.name}
                         </h3>
                         <div className="form-control mt-4">
                             <label className="label">Patient Name:</label>
@@ -204,12 +198,6 @@ export const Appointment = () => {
                                 required
                                 defaultValue={account ? JSON.parse(account).phone : ""}
                             />
-                            <label className="label">Preferred Date:</label>
-                            <input type="date" name="date" className="input input-bordered" required />
-                        </div>
-                        <div className="form-control mt-4">
-                            <label className="label">Preferred Time:</label>
-                            <input type="time" name="time" className="input input-bordered" required />
                         </div>
                         <div className="modal-action">
                             <button className="btn" type="button" onClick={handleCloseDialog}>
@@ -225,3 +213,5 @@ export const Appointment = () => {
         </div>
     );
 };
+
+export default Consultation;

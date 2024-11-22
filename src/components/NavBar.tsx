@@ -51,7 +51,7 @@ export const NavBar = () => {
           </Link>
         </div>
         <div className="flex flex-row gap-2 [&>a]:btn [&>a]:btn-ghost">
-          <Link to="/">Home</Link>
+          <Link to="/services">Home</Link>
           <Link to="/about">About</Link>
           <Link to="/blog">Blog</Link>
           <Link to="/reviews">Reviews</Link>
@@ -59,12 +59,16 @@ export const NavBar = () => {
             <>
               <Link to="/services">Services</Link>
               {account && JSON.parse(account).name ? (
+                <>
                 <Link
                   to="/services"
                   className="btn btn-ghost capitalize"
                 >
                   {JSON.parse(account).name}
                 </Link>
+                <Link to="/profile">Profile</Link>
+                <Link to="/account/reports">Reports</Link>
+                </>
               ) : null}
               <Link to="/logout">Logout</Link>
             </>

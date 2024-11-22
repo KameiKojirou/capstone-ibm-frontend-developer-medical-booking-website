@@ -11,10 +11,10 @@ export const Services = () => {
                 <p>Love yourself enough to live a healthy lifestyle.</p>
             </div>
             <div className="flex flex-row flex-wrap justify-center gap-2 mt-8 [&>a]:btn [&>a]:btn-ghost [&>a]:h-auto [&>a]:p-4">
-                <Link to="/services/consulation">
+                <Link to="/services/consultation">
                     <Card>
                         <SubTitle>Instant Consulation</SubTitle>
-                        <img src="./images/services/consulation.webp" alt="Instant Consulation" />
+                        <img src="./images/services/consultation.webp" alt="Instant Consulation" />
                     </Card>
                 </Link>
                 <Link to="/services/appointment">
