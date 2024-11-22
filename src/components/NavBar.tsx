@@ -43,17 +43,17 @@ export const NavBar = () => {
           </Link>
         </div>
         <div className="flex flex-row gap-2 items-center">
-          <Link to="/services" className="btn btn-ghost">Home</Link>
+          <Link to="/services" className="btn btn-ghost btn-sm">Home</Link>
           {/* <Link to="/about" className="btn btn-ghost">About</Link> */}
-          <Link to="/blog" className="btn btn-ghost">Blog</Link>
-          <Link to="/reviews" className="btn btn-ghost">Reviews</Link>
+          <Link to="/blog" className="btn btn-ghost btn-sm">Blog</Link>
+          <Link to="/reviews" className="btn btn-ghost btn-sm">Reviews</Link>
           {token ? (
             <>
-              <Link to="/services" className="btn btn-ghost">Services</Link>
+              <Link to="/services" className="btn btn-ghost btn-sm">Services</Link>
               {account && JSON.parse(account).name ? (
                 <div className="dropdown dropdown-hover">
-                  <label tabIndex={0} className="btn btn-ghost capitalize">
-                    {JSON.parse(account).name}
+                  <label tabIndex={0} className="btn btn-ghost btn-sm capitalize">
+                   Welcome, {JSON.parse(account).name}
                   </label>
                   <ul
                     tabIndex={0}
@@ -68,12 +68,12 @@ export const NavBar = () => {
                   </ul>
                 </div>
               ) : null}
-              <Link to="/logout" className="btn btn-ghost">Logout</Link>
+              <Link to="/logout" className="btn btn-ghost btn-sm">Logout</Link>
             </>
           ) : (
             <>
-              <Link to="/login" className="btn btn-ghost">Login</Link>
-              <Link to="/register" className="btn btn-ghost">Register</Link>
+              <Link to="/login" className="btn btn-ghost btn-sm">Login</Link>
+              <Link to="/register" className="btn btn-ghost btn-sm">Register</Link>
             </>
           )}
         </div>
