@@ -44,7 +44,7 @@ export const NavBar = () => {
         </div>
         <div className="flex flex-row gap-2 items-center">
           <Link to="/services" className="btn btn-ghost">Home</Link>
-          <Link to="/about" className="btn btn-ghost">About</Link>
+          {/* <Link to="/about" className="btn btn-ghost">About</Link> */}
           <Link to="/blog" className="btn btn-ghost">Blog</Link>
           <Link to="/reviews" className="btn btn-ghost">Reviews</Link>
           {token ? (
