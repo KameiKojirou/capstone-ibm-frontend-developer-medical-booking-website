@@ -1,35 +1,37 @@
-import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Home }from './pages/Home'
-import { About } from './pages/About'
-import { NavBar } from './components/NavBar'
-import { Login } from './pages/Login'
-import { Logout } from './pages/Logout'
-import { Register } from './pages/Register'
-import { ToastContainer } from './components/ToastContainer'
-import { Toasts } from './components/Toasts'
-import { Services } from './pages/Services'
-import { Consultation } from './pages/services/Consultation'
-import { Appointment } from './pages/services/Appointment'
-import { SelfCheckup } from './pages/services/SelfCheckup'
-import { Guidance } from './pages/services/Guidance'
-import { Blog } from './pages/Blog'
-import { Reviews } from './pages/Reviews'
-import { ToastTest } from './pages/ToastTest'
-import { YourProfile } from './pages/account/YourProfile'
-import { YourReports } from './pages/account/YourReports'
-import { AppointmentNotificationsContainer } from './components/AppointmentNotificationsContainer'
-import { AppointmentNotifications } from './components/AppointmentNotifactions'
+import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { About } from './pages/About';
+import { NavBar } from './components/NavBar';
+import { Login } from './pages/Login';
+import { Logout } from './pages/Logout';
+import { Register } from './pages/Register';
+import { ToastContainer } from './components/ToastContainer';
+import { Toasts } from './components/Toasts';
+import { Services } from './pages/Services';
+import { Consultation } from './pages/services/Consultation';
+import { Appointment } from './pages/services/Appointment';
+import { SelfCheckup } from './pages/services/SelfCheckup';
+import { Guidance } from './pages/services/Guidance';
+import { Blog } from './pages/Blog';
+import { Reviews } from './pages/Reviews';
+import { ToastTest } from './pages/ToastTest';
+import { YourProfile } from './pages/account/YourProfile';
+import { YourReports } from './pages/account/YourReports';
+import { AppointmentNotificationsContainer } from './components/AppointmentNotificationsContainer';
+import { AppointmentNotifications } from './components/AppointmentNotifactions';
 
 function App() {
-
   return (
     <>
-      <BrowserRouter basename='/capstone-ibm-frontend-developer-medical-booking-website'>
+      {/* Ensure the basename matches your Vite base configuration */}
+      <BrowserRouter basename="/capstone-ibm-frontend-developer-medical-booking-website">
+        {/* Navigation Bar */}
         <NavBar />
         <div className="flex flex-col gap-2 justify-center text-center">
           <main className="flex flex-col gap-2 w-full max-w-7xl mx-auto p-4">
             <Routes>
+              {/* Define all the routes */}
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
@@ -45,9 +47,13 @@ function App() {
               <Route path="/services/guidance" element={<Guidance />} />
               <Route path="/profile" element={<YourProfile />} />
               <Route path="/reports" element={<YourReports />} />
+
+              {/* Fallback route */}
               <Route path="*" element={<Home />} />
             </Routes>
           </main>
+
+          {/* Notification Containers */}
           <AppointmentNotificationsContainer>
             <AppointmentNotifications />
           </AppointmentNotificationsContainer>
@@ -57,7 +63,7 @@ function App() {
         </div>
       </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
