@@ -29,6 +29,7 @@ export const Reviews = () => {
     const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
     const [reviewText, setReviewText] = useState<string>("");
     const [reviewScore, setReviewScore] = useState<number>(5);
+    const [isFormValid, setIsFormValid] = useState<boolean>(false);
 
     const dialogRef = useRef<HTMLDialogElement>(null);
     const navigate = useNavigate();
@@ -43,8 +44,8 @@ export const Reviews = () => {
             navigate("/register");
         }
     }, [navigate]);
+
     useEffect(() => {
-        // Combine doctors from appointments and consultations
         const bookedDoctors = Object.values({ ...appointments, ...consultations }).map(
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (entry: any) => entry.doctor
@@ -67,6 +68,11 @@ export const Reviews = () => {
             dialogRef.current?.removeEventListener("click", handleOutsideClick);
         };
     }, [isDialogOpen]);
+
+    useEffect(() => {
+        // Form validation: Ensure both reviewText and reviewScore are valid
+        setIsFormValid(reviewText.trim().length > 0 && reviewScore > 0);
+    }, [reviewText, reviewScore]);
 
     const handleReviewClick = (doctor: Doctor) => {
         setSelectedDoctor(doctor);
@@ -207,7 +213,7 @@ export const Reviews = () => {
                             <button className="btn" type="button" onClick={handleCloseDialog}>
                                 Cancel
                             </button>
-                            <button className="btn btn-primary" type="submit">
+                            <button className="btn btn-primary" type="submit" disabled={!isFormValid}>
                                 Save Review
                             </button>
                         </div>

@@ -27,8 +27,8 @@ function App() {
     <>
       <BrowserRouter basename='/capstone-ibm-frontend-developer-medical-booking-website'>
         <NavBar />
-        <div className="p-4">
-          <main>
+        <div className="flex flex-col gap-2 justify-center text-center">
+          <main className="flex flex-col gap-2 w-full max-w-7xl mx-auto p-4">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
@@ -45,8 +45,7 @@ function App() {
               <Route path="/services/guidance" element={<Guidance />} />
               <Route path="/profile" element={<YourProfile />} />
               <Route path="/reports" element={<YourReports />} />
-
-              {/* <Route path="*" element={<Home />} /> */}
+              <Route path="*" element={<Home />} />
             </Routes>
           </main>
           <AppointmentNotificationsContainer>

@@ -27,7 +27,11 @@ export const Consultation = () => {
         JSON.parse(localStorage.getItem("consultations") || "{}")
     );
 
-    const dialogRef = useRef<HTMLDialogElement>(null); // Reference to the dialog element
+    const [patientName, setPatientName] = useState<string>("");
+    const [patientPhone, setPatientPhone] = useState<string>("");
+    const [isFormValid, setIsFormValid] = useState<boolean>(false);
+
+    const dialogRef = useRef<HTMLDialogElement>(null);
 
     const doctors: Doctor[] = [
         { name: "Dr. John", speciality: "Cardiologist", rating: 4.5, experience: 10 },
@@ -70,25 +74,33 @@ export const Consultation = () => {
         };
     }, [isDialogOpen]);
 
+    useEffect(() => {
+        // Check form validity
+        setIsFormValid(patientName.trim().length > 0 && patientPhone.trim().length > 0);
+    }, [patientName, patientPhone]);
+
     const handleBookClick = (doctor: Doctor) => {
         setSelectedDoctor(doctor);
+        setPatientName(account ? JSON.parse(account).name : "");
+        setPatientPhone(account ? JSON.parse(account).phone : "");
         setIsDialogOpen(true);
     };
 
     const handleCloseDialog = () => {
         setIsDialogOpen(false);
         setSelectedDoctor(null);
+        setPatientName("");
+        setPatientPhone("");
     };
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!selectedDoctor) return;
 
-        const formData = new FormData(e.currentTarget);
         const consultation: Consultation = {
             doctor: selectedDoctor,
-            patientName: formData.get("patientName") as string,
-            patientPhone: formData.get("patientPhone") as string,
+            patientName,
+            patientPhone,
         };
 
         const updatedConsultations = { ...consultations, [selectedDoctor.name]: consultation };
@@ -187,23 +199,25 @@ export const Consultation = () => {
                                 type="text"
                                 name="patientName"
                                 className="input input-bordered"
+                                value={patientName}
+                                onChange={(e) => setPatientName(e.target.value)}
                                 required
-                                defaultValue={account ? JSON.parse(account).name : ""}
                             />
                             <label>Patient Phone:</label>
                             <input
                                 type="tel"
                                 name="patientPhone"
                                 className="input input-bordered"
+                                value={patientPhone}
+                                onChange={(e) => setPatientPhone(e.target.value)}
                                 required
-                                defaultValue={account ? JSON.parse(account).phone : ""}
                             />
                         </div>
                         <div className="modal-action">
                             <button className="btn" type="button" onClick={handleCloseDialog}>
                                 Cancel
                             </button>
-                            <button className="btn btn-primary" type="submit">
+                            <button className="btn btn-primary" type="submit" disabled={!isFormValid}>
                                 Confirm
                             </button>
                         </div>

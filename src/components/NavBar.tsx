@@ -28,7 +28,7 @@ export const NavBar = () => {
 
   return (
     <div className="p-4 w-full">
-      <nav className="flex flex-row flex-wrap justify-between items-center gap-2">
+      <nav className="flex flex-row flex-wrap justify-between items-center gap-2 max-w-7xl mx-auto">
         <div className="flex flex-row gap-2 items-center">
           <Link to="/" className="btn btn-ghost text-lg font-bold">
             StayHealthy
