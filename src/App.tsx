@@ -18,6 +18,8 @@ import { Reviews } from './pages/Reviews'
 import { ToastTest } from './pages/ToastTest'
 import { YourProfile } from './pages/account/YourProfile'
 import { YourReports } from './pages/account/YourReports'
+import { AppointmentNotificationsContainer } from './components/AppointmentNotificationsContainer'
+import { AppointmentNotifications } from './components/AppointmentNotifactions'
 
 function App() {
 
@@ -47,6 +49,9 @@ function App() {
               {/* <Route path="*" element={<Home />} /> */}
             </Routes>
           </main>
+          <AppointmentNotificationsContainer>
+            <AppointmentNotifications />
+          </AppointmentNotificationsContainer>
           <ToastContainer>
             <Toasts />
           </ToastContainer>
