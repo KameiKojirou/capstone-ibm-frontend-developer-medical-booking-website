@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { Card } from "../../components/Card";
 import { SubTitle } from "../../components/SubTitle";
 import { addToast } from "../../stores/toastStore";
+import { FindADoctor } from "../../components/FindADoctor";
 
 type Doctor = {
     name: string;
@@ -115,7 +116,8 @@ export const Appointment = () => {
     return (
         <div>
             <Title>Book an Appointment</Title>
-            {account && <p>Logged in as: {JSON.parse(account).name}</p>}
+            <FindADoctor />
+            <img src="~/images/services/find-doctor.webp" alt="Find a Doctor" />
             <h2 className="text-2xl font-bold py-4">Find a Doctor</h2>
             <select
                 aria-placeholder="Find a Doctor by speciality"
